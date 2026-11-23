@@ -1,0 +1,13 @@
+# Deploy the backend from the repository root. Keep one instance for in-memory data.
+services:
+  - type: web
+    name: amber-ecommerce-api
+    runtime: node
+    plan: free
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+# After Vercel is deployed, add CLIENT_ORIGIN in Render's Environment settings.
